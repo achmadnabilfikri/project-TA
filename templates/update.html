@@ -1,0 +1,65 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>Update informasi pasien</h1>
+<br />
+<form action="/update/{{ patients.id_pasien }}" method="POST">
+  <div class="row form-group">
+    <div class="row form-group">
+      <div class="col col-md-3">
+        <label for="nama" class="form-control-label">Nama</label>
+      </div>
+      <div class="col-12 col-md-9">
+        <input type="text" name="nama" value="{{ patients.nama }}" required />
+      </div>
+    </div>
+
+    <div class="row form-group">
+      <div class="col col-md-3">
+        <label for="umur" class="form-control-label">Umur</label>
+      </div>
+      <div class="col-12 col-md-9">
+        <input type="text" name="umur" value="{{ patients.umur }}" required />
+      </div>
+    </div>
+
+    <div class="row form-group">
+      <div class="col col-md-3">
+        <label for="alamat" class="form-control-label">Alamat</label>
+      </div>
+      <div class="col-12 col-md-9">
+        <input
+          type="text"
+          name="alamat"
+          value="{{ patients.alamat }}"
+          required
+        />
+      </div>
+    </div>
+
+    <div class="row form-group">
+      <div class="col col-md-3">
+        <label for="gambar" class="form-control-label">Gambar</label>
+      </div>
+      <div class="col-12 col-md-9">
+        <input
+          type="text"
+          name="gambar"
+          value="{{ patients.gambar }}"
+          required
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="row form-group">
+    <div class="col-md-12">&nbsp;</div>
+  </div>
+
+  <div class="row form-group">
+    <div class="col-md-9 offset-md-3">
+      <button type="submit">Update</button>
+    </div>
+  </div>
+</form>
+
+{% endblock %}

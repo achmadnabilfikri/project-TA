@@ -1,0 +1,144 @@
+{% extends 'base.html' %} {% block content %} {% with messages =
+get_flashed_messages(with_categories=True) %} {% if messages %}
+<script>
+  {% for category, message in messages %}
+    {% if category == 'error' %}
+      alert('{{ message }}');
+    {% endif %}
+  {% endfor %}
+</script>
+{% endif %} {% endwith %}
+<div class="content mt-3">
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-header">
+        <h4>Input Informasi Pasien</h4>
+      </div>
+      <div class="card-body">
+        <form action="/submit" method="post" enctype="multipart/form-data">
+          <div class="row form-group">
+            <div class="row form-group">
+              <div class="col col-md-3">
+                <label for="id_pasien" class="form-control-label"
+                  >Id Pasien</label
+                >
+              </div>
+              <div class="col-12 col-md-9">
+                <input
+                  type="text"
+                  id="id_pasien"
+                  name="id_pasien"
+                  class="form-control"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="row form-group">
+              <div class="col col-md-3">
+                <label for="nama" class="form-control-label">Nama</label>
+              </div>
+              <div class="col-12 col-md-9">
+                <input
+                  type="text"
+                  id="nama"
+                  name="nama"
+                  class="form-control"
+                  required
+                />
+              </div>
+            </div>
+            <div class="row form-group">
+              <div class="col col-md-3">
+                <label for="umur" class="form-control-label">Umur</label>
+              </div>
+              <div class="col-12 col-md-9">
+                <input
+                  type="number"
+                  id="umur"
+                  name="umur"
+                  class="form-control"
+                  required
+                />
+              </div>
+            </div>
+            <div class="row form-group">
+              <div class="col col-md-3">
+                <label for="alamat" class="form-control-label">Alamat</label>
+              </div>
+              <div class="col-12 col-md-9">
+                <textarea
+                  id="alamat"
+                  name="alamat"
+                  class="form-control"
+                  required
+                ></textarea>
+              </div>
+            </div>
+            <div class="row form-group">
+              <div class="col col-md-3">
+                <label for="file-input" class="form-control-label"
+                  >File input</label
+                >
+              </div>
+              <div class="col-12 col-md-9">
+                <input
+                  type="file"
+                  id="file-input"
+                  name="my_image"
+                  class="form-control-file"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3" style="margin-left: 15px"></div>
+            <button type="submit" class="btn btn-danger">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-header">
+        <h4>Hasil Informasi Pasien</h4>
+      </div>
+      <div class="card-body text-center">
+        {% if patients %}
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Id_Pasien</th>
+              <th>Nama</th>
+              <th>Umur</th>
+              <th>Alamat</th>
+              <th>Gambar</th>
+              <th>Hasil Klasifikasi</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for patient in patients %}
+            <tr>
+              <td>{{ patient[0] }}</td>
+              <td>{{ patient[1] }}</td>
+              <td>{{ patient[2] }}</td>
+              <td>{{ patient[3] }}</td>
+              <td>
+                <img src="{{ patient[4] }}" height="50%" width="50%" />
+              </td>
+              <td>{{ patient[5] }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% else %}
+        <p>No data available.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

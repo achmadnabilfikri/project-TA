@@ -1,0 +1,65 @@
+{% extends 'base.html' %} {% block content %}
+<style>
+  tr td:last-child {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .btn {
+    margin: 0 2px;
+    padding: 0.2rem 0.2rem;
+    white-space: normal;
+  }
+</style>
+<div class="content mt-3">
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-header">
+        <h4>Data Pasien</h4>
+      </div>
+      <div class="card-body text-center">
+        {% if patients %}
+        <table id="example" class="table">
+          <thead>
+            <tr>
+              <th>Id_Pasien</th>
+              <th>Nama</th>
+              <th>Umur</th>
+              <th>Alamat</th>
+              <th>Gambar</th>
+              <th>Hasil Klasifikasi</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for patient in patients %}
+            <tr>
+              <td>{{ patient[0] }}</td>
+              <td>{{ patient[1] }}</td>
+              <td>{{ patient[2] }}</td>
+              <td>{{ patient[3] }}</td>
+              <td>
+                <img src="{{ patient[4] }}" height="80px" width="80px" />
+              </td>
+              <td>{{ patient[5] }}</td>
+              <td>
+                <a href="/edit/{{ patient[0] }}" class="btn btn-info">Update</a>
+                <a
+                  href="/delete/{{ patient[0] }}"
+                  class="btn btn-danger btn-delete btn-sm"
+                  >Hapus</a
+                >
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% else %}
+        <p>No data available.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
